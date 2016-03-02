@@ -18,6 +18,6 @@ This is quite an interesting opportunity.  Do I spend a month on a beach; do som
 There are people who I worked with who when the laptop closes at 5, they stop caring about all things computer.  While part of me would love to be able to do this, my brain is wired to keep reading and learning.  One of the things I felt the BBC did well is training, one of the things they did badly was learning.  
 For example, if you are learning Erlang for your own benefit, great.  If you are learning Java because if you don't, you know will be put in a situation where you are being asked to write Java with no time to learn it, then this is a problem.  You are raising the expectation of yourself, while the company gets your time for free in the evenings and weekends.  As the BBC is quite big, this is my opinion and other teams have it different.  Some teams have 10% time, many hack days a year, work libraries with books, both paper and digital.
 
-### This month is about learning.
+### This month is about learning
 
 I have decided to spend a lot of this month learning new things that have no relevance to any work past or future.  I am pretty weak in the area of front end for example, something I hope to improve upon.  There are many other areas, from infrastructure, different languages, working with databases that I plan to work on.  I will also create projects and open source them on Github, updating my blog with info about what kind of things I learned.  
