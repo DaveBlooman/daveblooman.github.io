@@ -104,7 +104,7 @@ and how to attach your EC2 instances in your ASG to your ALB
 
 The question is, should ALB's be used everywhere?  In short, if your tooling has a nice upgrade path, yes.  ALB's offer better metrics and more flexibility down the line, while offering new features like HTTP/2 and WebSockets.  
 
-Does ALB take away the need for HAProxy or NGINX?  Maybe, but there are going to be use cases where ALB doesn't work completely and you will need something for central management.  A simple example is IP restriction, if you have 5 ALB's that behind HAProxy, you will only change your restriction in one place, instead of 5 security group changes.  
+Does ALB take away the need for HAProxy or NGINX?  Maybe, but there are going to be use cases where ALB doesn't work completely and you will need something for central management.  A simple example is IP restriction, if you have 5 ALB's that are behind HAProxy, you will only change your restriction in one place, instead of 5 security group changes.  
 
 ## What Next
 
