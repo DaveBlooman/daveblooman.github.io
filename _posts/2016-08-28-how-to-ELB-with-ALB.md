@@ -112,4 +112,4 @@ Docker recently announced a product called Docker for AWS which can tie in with 
 
 Bottom line is that the ALB is a pretty decent product from AWS, with features that make it easier to run microservices and container architectures.
 
-AWS Application Load Balancer [https://aws.amazon.com/elasticloadbalancing/applicationloadbalancer/](https://aws.amazon.com/elasticloadbalancing/applicationloadbalancer/)
+Read more on the [AWS Application Load Balancer](https://aws.amazon.com/elasticloadbalancing/applicationloadbalancer/)
