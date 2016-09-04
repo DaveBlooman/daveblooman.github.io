@@ -168,8 +168,8 @@ By using Apex, we can achieve some really complex Lambda management, which AWS a
 Github push kicks of the CI build, config is retrieved from [Consul](https://www.consul.io/), then the Go binaries are built by Apex while all running on Teamcity.  Apex assumes the correct role to deploy to the correct AWS account uploads the zip file created.  In this setup, a cron is setup by Cloudwatch Events that invokes the Lambda function, then events are sent to Cloudwatch logs and Cloudwatch Metrics as well as our exception handling service, Sentry.  Cloudwatch logs invokes another Lambda function itself which sends all Cloudwatch log data to Sumologic for analysis.  
 
 
-<img src="{{ BASE_PATH}}/images/apex_Lambda.png" class="img-responsive" alt="Apex">
-<a href="{{ BASE_PATH}}/images/apex_Lambda.png" alt="Apex Lambda">Link to image</a>
+<img src="{{ BASE_PATH}}/images/apex_lambda.png" class="img-responsive" alt="Apex">
+<a href="{{ BASE_PATH}}/images/apex_lambda.png" alt="Apex Lambda">Link to image</a>
 
 AWS Lambda is a great tool, but there is much more to using it than just writing code in the AWS console.  It requires some finesse in order to create a pipeline for build, deployment and testing.  Apex defines a way of doing things that makes sense, isn't overly complicated and doesn't require lots of dependencies in order to get going while fitting in with your current infrastructure.
 
