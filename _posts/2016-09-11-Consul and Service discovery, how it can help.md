@@ -79,7 +79,7 @@ You can obviously do some simple things to prevent failure if Consul wasn't cont
 
 Consul has covered a few of the questions I posed earlier, but this is the tool that really puts Consul at the core of you service discovery.  Consul supports the concept of services, which can be anything that you want it to be.  A service has a few basics and is described in a JSON file.
 
-```JSON
+```json
 {
   "service": {
     "name": "some-service",
@@ -98,7 +98,7 @@ Consul has covered a few of the questions I posed earlier, but this is the tool 
 
 In reality, a service definition can just be a file like this
 
-```JSON
+```json
 {
   "service": {
     "name": "some-service",
