@@ -8,7 +8,7 @@ tags: consul hashicorp
 
 ### Sounds great, why do I need it?
 
-If you are running a single app, you are probably very aware of where it is running, what class of server it is on, how many instances, what the up time is, how to deploy it etc.  There comes a point in a lot of companies, big and small, where a single app just isn't a right hit anymore.  
+If you are running a single app, you are probably very aware of where it is running, what class of server it is on, how many instances, what the up time is, how to deploy it etc.  There comes a point in a lot of companies, big and small, where a single app just isn't the right git anymore.  
 
 You might go down the route of building micro services or try a service orientated architecture, whatever you decide to do, you want another app to complement your monolith.  That is to say, your monolith is staying around, but you want to be able to build things that are not really in the scope of that project anymore.  In a situation where you are completely cloud, this isn't something you can jump right into without some thought.  Is this new thing you are building an internal service, is it public facing, do I need to have walls between the new app and the old, or does it need to be highly connected.
 
@@ -46,14 +46,14 @@ There are 3 tools to talk about, Consul, consul-template and envconsul.  Hopeful
 Consul's API is core to the other two tools, consul-template and envconsul.
 
 ### envconsul
-envconsul can be used to drive dynamic config changes from the Consul KV store and restart your application to take the values.  If you are currently having to rebuild and server or Docker image because you bake in config, you probably know how a single character mistake can cause you to rebuild and change multiple servers taking a annoying amount of time.  envconsul is the best solution I have seen to prevent that, by giving you lots of options in how the app restart, what values from Consul are going to be injected into your app and what the behaviour should be if something fails.  
+envconsul can be used to drive dynamic config changes from the Consul KV store and restart your application to take the values.  If you are currently having to rebuild your server or Docker image because you bake in config, you probably know how a single character mistake can cause you to rebuild and redeploy.  envconsul is the best solution I have seen to prevent that, by giving you lots of options in how the app restart, what values from Consul are going to be injected into your app and what the behaviour should be if something fails.  
 
 envconsul is written in Go and is deployed as a single binary.  You wrap your call to your app with envconsul, such as
 
 ```sh
 envconsul -consul 127.0.0.1:8500 -sanitize -upcase -prefix myvalues/ /opt/my_application
 ```
-What happens here is where specify the consul agent, then use envconsul to force a environment variable style, upcase, then pull in KV from Consul from a folder, `myvalues`.  The my_application can be anything, so you can print out all of the values from your Consul values using
+What happens here is we specify the consul agent, then use envconsul to force the environment variables to a certain case, upcase, then pull in KV from Consul from a folder, `myvalues`.  The my_application can be anything, so you can print out all of the values from your Consul values using
 
 ```sh
 envconsul -consul 127.0.0.1:8500 -sanitize -upcase -prefix myvalues env
@@ -107,15 +107,15 @@ In reality, a service definition can just be a file like this
 }
 ```
 
-Either way, you Consul cluster will know about `some-service`, what port is on and the meta data from the agent.  The agent data will include IP address, datacenter etc.  
+Either way, your Consul cluster will know about `some-service`, what port it's on and the meta data from the agent.  The agent data will include IP address, datacenter etc.  
 
-When a Consul agent is started and this file is found in it's config.d directory, it will register with the cluster.  This will occur for every instance of the service, so you will know which servers your app is running on, what their IP's are and what port they are running on.   Taking a closer look at the first example, there is a health check, this combined with the service information means that if your health check fails, the instance of the app will not be included when queried by consul-template.  This is useful when you are reliant on a DB, cache, external service and it goes down for that instance, you don't want it to be in service anymore.  This type of service availability is much more powerful than just a TCP or HTTP check, meaning much more thorough checking before a service is considered healthy.
+When a Consul agent is started and this file is found in its config.d directory, it will register with the cluster.  This will occur for every instance of the service, so you will know which servers your app is running on, what their IP's are and what port they are running on.   Taking a closer look at the first example, there is a health check, this combined with the service information means that if your health check fails, the instance of the app will not be included when queried by consul-template.  This is useful when you are reliant on a DB, cache, external service and it goes down for that instance, you don't want it to be in service anymore.  This type of service availability is much more powerful than just a TCP or HTTP check, meaning much more thorough checking before a service is considered healthy.
 
 ### consul-template
 
 [consul-template](https://github.com/hashicorp/consul-template) provides a convenient way to populate values from Consul into the file system using the consul-template daemon.  In the same way we saw values injected into an app using envconsul, we can dynamically update files and reload applications such as [HAProxy](http://www.haproxy.org/).
 
-consul-template will only write healthy checks of apps, so you can be sure that you services are not going to be full of healthy apps.  consul-template has a large array of options, with either a CLI or config file driven configuration.
+consul-template will only write healthy checks of apps, so you can be sure that your services are not going to be full of unhealthy apps.  consul-template has a large array of options, with either a CLI or config file driven configuration.
 
 Here is an example of using consul-template with HAProxy
 
@@ -123,7 +123,7 @@ Here is an example of using consul-template with HAProxy
 consul-template -consul 127.0.0.1:8500 -template "/etc/haproxy/haproxy.ctmpl:/etc/haproxy/haproxy.cfg:service haproxy restart" -retry 30s
 ```
 
-The `ctmpl` file contains the Go template syntax, so it is quite simple to write complex configs.  In my example, the Consul dashboard is being exposed but the Consul health check operates on port 8300, so the web UI wouldn't be accessible.  With a little if logic, we can view the dashboard on a different port, 8500 in this case.  
+The `ctmpl` file contains the Go template syntax, so it is quite simple to write complex configs.  In my example, the Consul dashboard is being exposed but the Consul health check operates on port 8300, so the web UI wouldn't be accessible.  With a little conditional logic, we can view the dashboard on a different port, 8500 in this case.  
 
 The template is also full of ranges, populated by Consul defined services that fill out the server's, port and name sections.  This is where the service definition file data is used, building a full HAProxy config.
 
@@ -170,12 +170,12 @@ At this point, you will hopefully be thinking, this all sounds great, centralise
 
 Taking a step back for a moment, this post is aimed at those who don't have a service like this currently and are thinking about it.  Or perhaps you are a company that wants to know if it is worth the learning time and want to justify implementing a new system like Consul.  As i've mentioned previously, there are a few reasons to run Consul, but it comes down to how much you already have in place.  Do you have a health check service, central config store, how do you do load balancing and are you wanting to run [HAProxy](http://www.haproxy.org/) or [NGINX](https://www.nginx.com/) instead of a cloud provider?
 
-I like to think about it like this, once your cluster is up, all you need to do is write a 10 like JSON file and your service can be automatically be discovered, load balanced, be DNS reachable and have health checks.  I recently rolled out a [Grafana](http://grafana.org/) server, it was based on a AMI bake and once it started I could see it passed health check and could visit the app immediately.  I could have easily created an route53 entry on an ELB with ASG and EC2 instance and made it the same way, but this assumes a lot about my infrastructure knowledge.  
+I like to think about it like this, once your cluster is up, all you need to do is write a 10 like JSON file and your service can be automatically discovered, load balanced, be DNS reachable and have health checks.  I recently rolled out a [Grafana](http://grafana.org/) server, it was based on a AMI bake and once it started I could see it passed health check and could visit the app immediately.  I could have easily created an route53 entry on an ELB with ASG and EC2 instance and made it the same way, but this assumes a lot about my infrastructure knowledge.  
 
 I recently was setting up a service with another developer and once we had the health check file in place, our goal was simply to get a check light in Consul.   Once we did, the app was working and we could hit the apps API.  There are always going to be resources needed for deploying on cloud which may be a more infra team task, but once you have them in place, creating a new service can be as easy as creating a CI job, Docker image or baking an AMI.
 
 ## Lots More
 
-Consul has a lot more to offer than I've mentioned, with most people picking and choosing which features to take advantage of. If you feel like building your own service, have a look at the [Watches](https://www.consul.io/docs/agent/watches.html) part of the API, it can really help to run custom scripts based on events.  An example would be sending a slack message when a service goes critical, [example](https://github.com/AcalephStorage/consul-alerts).  There are also lots of things that plug into Consul, Hashicorp's own [Vault](https://www.vaultproject.io/), by also some cool projects like [Fabio](https://github.com/eBay/fabio) and [Traefik](https://github.com/containous/traefik).  
+Consul has a lot more to offer than I've mentioned, with most people picking and choosing which features to take advantage of. If you feel like building your own service, have a look at the [Watches](https://www.consul.io/docs/agent/watches.html) part of the API, it can really help to run custom scripts based on events.  An example would be sending a slack message when a service goes critical, [example](https://github.com/AcalephStorage/consul-alerts).  There are also lots of things that plug into Consul, Hashicorp's own [Vault](https://www.vaultproject.io/), but also some cool projects like [Fabio](https://github.com/eBay/fabio) and [Traefik](https://github.com/containous/traefik).  
 
 You can read the full documentation of Consul here [https://www.consul.io](https://www.consul.io/)
