@@ -8,7 +8,7 @@ tags: consul hashicorp
 
 ### Sounds great, why do I need it?
 
-If you are running a single app, you are probably very aware of where it is running, what class of server it is on, how many instances, what the up time is, how to deploy it etc.  There comes a point in a lot of companies, big and small, where a single app just isn't the right git anymore.  
+If you are running a single app, you are probably very aware of where it is running, what class of server it is on, how many instances, what the up time is, how to deploy it etc.  There comes a point in a lot of companies, big and small, where a single app just isn't the right fit anymore.  
 
 You might go down the route of building micro services or try a service orientated architecture, whatever you decide to do, you want another app to complement your monolith.  That is to say, your monolith is staying around, but you want to be able to build things that are not really in the scope of that project anymore.  In a situation where you are completely cloud, this isn't something you can jump right into without some thought.  Is this new thing you are building an internal service, is it public facing, do I need to have walls between the new app and the old, or does it need to be highly connected.
 
