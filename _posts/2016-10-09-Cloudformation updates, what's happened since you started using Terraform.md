@@ -11,6 +11,7 @@ Cloudformation, the AWS specific infrastructure as code service, I don't use it 
 A couple of years ago, if you were automating your infrastructure, you were probably using Cloudformation.  AWS looked after the state of your application, handled rollbacks, validated your template, it was the best.  You could build multiple AWS services into 1 JSON template, EC2, ELB, Cloudwatch, Route53 all came together to launch an application.  Sounds great, but it actually was really difficult to manage.  
 
 Hardcoding VPC ID's, subnets, Hosted Zone ID's, it was all a bit....non cloud, if that's such a thing.  Many tools were built to take on this challenge, [CFNDSL](https://github.com/stevenjack/cfndsl) and Troposphere were two that BBC used while I worked there.  CFNDSL was so heavily used in our team, a colleague, Steve Jack, became the maintainer of the project.  We then extended this due to the fact we had multiple AWS accounts with multiple environments.  We used a YAML file that was environment specific which could share VPC, Route53, ASG specific variables across multiple stacks, this would have a directory such as :
+
 ```sh
 |____int
 | |____Newsbeat.yaml
