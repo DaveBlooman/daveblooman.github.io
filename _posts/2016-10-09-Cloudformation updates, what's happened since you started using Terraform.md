@@ -20,6 +20,7 @@ Hardcoding VPC ID's, subnets, Hosted Zone ID's, it was all a bit....non cloud, i
 |____test
 | |____Newsbeat.yaml
 ```
+
 with our stacks, written in CFNDSL Ruby syntax, looking like this.
 
 ```sh
