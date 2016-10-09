@@ -10,7 +10,7 @@ Cloudformation, the AWS specific infrastructure as code service, I don't use it 
 
 A couple of years ago, if you were automating your infrastructure, you were probably using Cloudformation.  AWS looked after the state of your application, handled rollbacks, validated your template, it was the best.  You could build multiple AWS services into 1 JSON template, EC2, ELB, Cloudwatch, Route53 all came together to launch an application.  Sounds great, but it actually was really difficult to manage.  
 
-Hardcoding VPC ID's, subnets, Hosted Zone ID's, it was all a bit....non cloud, if that's such a thing.  Many tools were built to take on this challenge, [CFNDSL](https://github.com/stevenjack/cfndsl) and Troposphere were two that BBC used while I worked there.  CFNDSL was so heavily used in our team, a colleague, Steve Jack, became the maintainer of the project.  We then extended this due to the fact we had multiple AWS accounts with multiple environments.  We used a YAML file that was environment specific which could share VPC, Route53, ASG specific variables across multiple stacks, this would have a directory such as :
+Hardcoding VPC ID's, subnets, Hosted Zone ID's, it was all a bit....non cloud, if that's such a thing.  Many tools were built to take on this challenge, [CFNDSL](https://github.com/stevenjack/cfndsl) and Troposphere were two that BBC used while I worked there.  CFNDSL was so heavily used in our team, a colleague, Steve Jack, became the maintainer of the project.  We then extended this with another tool for internal use due to the fact we had multiple AWS accounts with multiple environments.  We used a YAML file that was environment specific which could share VPC, Route53, ASG specific variables across multiple stacks, this would have a directory such as :
 
 ```sh
 |____int
@@ -64,9 +64,9 @@ Terraform is a common syntax for multiple "providers", a provider could be AWS, 
 
 ## Infrastructure is an living thing
 
-Cloudformation looked quite primitive next to something like Terraform, especially with the concept of infrastructure as an organism that Terraform embraces, not a collection of Cloudformation stacks that have hardcoded parameters.  
+When I started using Terraform, Cloudformation began to look quite primitive.  This was especially clear with the concept of infrastructure as an organism that Terraform embraces, not a collection of Cloudformation stacks that have hardcoded parameters.  
 
-Terraform also allowed for changes to be displayed for an entire infrastructure, but also for changes to impact an entire infrastructure.  If you went ahead and tried to delete a VPC that was create in a Cloudformation stack, AWS will happily go head and try to do that for you.  The problem is that 20 other stacks rely on that VPC, so your operation is going to fail.  But you may not know that up front, so you waste time and potentially break infrastructure.  
+Terraform also allowed for changes to be displayed not just for a single stack, but for changes that impact all your infrastructure.  If you went ahead and tried to delete a VPC that was created in a Cloudformation stack, AWS will happily go head and try to do that for you.  The problem is that 20 other stacks rely on that VPC, so your operation is going to fail.  But you may not know that up front, so you waste time and potentially break infrastructure.  
 
 With Terraform, you can see how a delete VPC event will impact the whole infrastructure, this feature was one of the catalysts for many to transition to Terraform from Cloudformation.
 
@@ -124,7 +124,7 @@ This new !FindInMap function is nice because you no longer need to use multiple 
 
 Yes, my stacks can know about each other.  This is one of the best things released this year by AWS.
 
-You can get started by using the outputs functionality.
+You can get started by using the outputs functionality.  In the example below, you can also see the new !Sub syntax, great for interpolation.
 
 ```yaml
 Outputs:
@@ -234,4 +234,4 @@ While I have problems with Terraform, it still wins, for now.  Cloudformation st
 
 I would like to see Cloudformation as a broader tool.  As an example, I decide to change 4 Cloudformation stacks at the same time, now I have 4 change sets and I can't see what the impact is across those 4 stacks from all the changes, only the changes from the stack in the change set.  So yes, reviewing is nicer, but it is a one at a time approach.
 
-This is where the infrastructure as a living organism comes into the fore.  If you need to replace the kidneys in a human, you don't do 3 surgeries, taking 1 out at a time and then putting 1 back in.  I'm sure the team at AWS see the potential, but it is a concept Terraform got right from very early on, so perhaps Cloudformation needs to become something new, something designed for the post Lambda, Docker, Micro service world.
+This is where the infrastructure as a living organism comes into the fore.  If you need to replace the kidneys in a human, you don't do 3 surgeries, taking 1 out at a time and then putting 1 back in, you do one surgery.  The idea of stacks is great, but as people begin to have dosens of stacks that are dependant on eachother, changes are going to become more difficult.  What might happen is people don't use other stacks because it becomes difficult to scope the changes, particularly for IAM and S3 policy files.  I'm sure the team at AWS see the potential, but it is a concept Terraform got right from very early on, so perhaps Cloudformation needs to become something new, something designed for the post Lambda, Docker, Micro service world.
