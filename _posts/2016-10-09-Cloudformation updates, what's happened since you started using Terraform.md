@@ -175,7 +175,15 @@ Resources:
 
 As you can see, for the life of this stack, there will be a relationship between the two stacks.  The syntax is quite nice too, the shorthand YAML syntax is simple and has the potential to support strings, arrays etc.  There is also a more secure feeling here, in Terraform, you can go ahead and create a reference to something anywhere in your infrastructure.  With these outputs, you are defining what should be accessible by other stacks.  Obviously, if you reference lots of things, you are going to build up a huge list of outputs, but that is more likely on core stacks and not on application/generic stacks.
 
-There is one drawback, you can't use dynamic variables in imports, you can see how I have hardcoded the CoreStack name into the import.  Hopefully AWS will add this feature soon.
+Also note that you can use dynamic variables in imports, this uses `Fn::ImportValue`.  For example, importing the value of a security group ID from another stack.
+
+```json
+{
+  "Fn::ImportValue": {
+    "Fn::Sub": "${CoreStack}-SecurityGroupID"
+  }
+}
+```
 
 ## Looking good, but that mess from earlier?
 
