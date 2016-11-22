@@ -4,13 +4,17 @@ category: aws
 tags: aws microservice codedeploy
 ---
 
-We have a familiar story, big monolith, trying to break into microservices, same old same old.  We have a dotnet stack, on Windows, which is deployed using Octopus and TeamCity CI.  We wanted to use Go, but weren't interested in the Docker route, so what do you choose in that situation?
+We have a familiar story at [FundApps](https://www.fundapps.co/), big monolith, trying to break into microservices, same old same old.  We have a dotnet stack, on Windows, which is deployed using Octopus and TeamCity CI.  We wanted to use Go, but weren't interested in the Docker route, so what do you choose in that situation?
 
 ### The Change
 
 When deciding to move away from dotnet for some new applications, there are some questions around culture, workflow and learning.  If you are building and testing code on a CI server, then deploying via CI to your environments, it makes to keep the same approach.  The change came in the tooling and technologies, so lots of change, but lots of familiarity.
 
-We did some direct replacements, Linux for Windows, Golang for C# and Codedeploy for Octopus.  This may seem like an odd choice, but it actually allowed to achieve our core goal, How quickly can we get into production and deploy whenever we want.  Considering there was no existing system for doing this on Linux within the company, we had a lot of opportunities, we felt CodeDeploy was a good fit.
+We did some direct replacements, Linux for Windows, Golang for C# and Codedeploy for Octopus.  This may seem like an odd choice, but it actually allowed us to achieve our core goal.
+
+`How quickly can we get into production and deploy whenever we want`
+
+Considering there was no existing system for doing this on Linux within the company, we had a lot of opportunities, we felt CodeDeploy was a good fit.
 
 ### CodeDeploy
 
