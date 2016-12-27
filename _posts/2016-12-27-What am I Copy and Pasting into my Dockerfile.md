@@ -54,7 +54,7 @@ echo "testing"
 echo $DAVE
 ```
 Lets run it
-```sh
+```bash
 ~> ./demo.sh
 + echo testing
 testing
