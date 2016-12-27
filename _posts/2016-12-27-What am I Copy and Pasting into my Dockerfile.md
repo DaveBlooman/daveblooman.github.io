@@ -54,11 +54,12 @@ echo "testing"
 echo $DAVE
 ```
 Lets run it
+
 ```bash
-~> ./demo.sh
-+ echo testing
-testing
-./demo.sh: line 5: DAVE: unbound variable
+~> ./demo.sh  
++ echo testing  
+testing  
+./demo.sh: line 5: DAVE: unbound variable  
 ```
 
 This will error, but at least we know that our first step was a success.  I use this in most of my shell scripts.
