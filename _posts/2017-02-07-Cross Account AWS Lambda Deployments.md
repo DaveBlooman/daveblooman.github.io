@@ -39,7 +39,7 @@ This is example templates for Terraform, if you would like the full working exam
 
 With Terraform, the first step is to create a role with account A, set the principal to be that of account A in the terraform below.  
 
-```terraform
+```json
 
 resource "aws_iam_role" "lambda_assume_role" {
   name = "lambda-assume-role"
@@ -119,7 +119,7 @@ If you are using tool such as [Apex](http://apex.run) that manages all your Lamb
 ### CI Server Role
 
 
-```terraform
+```json
 resource "aws_iam_role" "build_agent_access" {
   name = "build_agent_access"
 
