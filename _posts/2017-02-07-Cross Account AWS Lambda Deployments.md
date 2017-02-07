@@ -15,6 +15,7 @@ Here's how we do it.
 To start, you want to be running your deployments from an AWS EC2 instance.  This is usually via a CI server like Jenkins, Teamcity or GOCD.  By using a CI server on EC2, you can use the benefits of IAM roles.
 
 This sets up the deployment model, with one account, A, deploying to account A, then use A to deploy to another account, B.  For example.  
+
 ```sh
 Account A CI server -> Account A  
 Account A CI server -> Account B  
