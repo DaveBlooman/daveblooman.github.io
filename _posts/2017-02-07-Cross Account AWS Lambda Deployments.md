@@ -112,7 +112,7 @@ EOF
 
 ### Create Again For Second Account
 
-Now you have done that, duplicate the process except this time, use Account B ID in the principal section.  You will now have two IAM roles, both can be used to deploy Lambdas.  
+Now you have done that, duplicate the process except this time, when creating Account B IAM, use Account A AWS ID in the principal section.  This will signal to AWS that you want Account A to be able to assume this role.  You will now have two IAM roles, both can be used to deploy Lambdas with Account A acting as the primary account.
 
 If you are using tool such as [Apex](http://apex.run) that manages all your Lambdas, you will need quite open permissions to create, delete and update functions etc.
 
@@ -164,6 +164,8 @@ EOF
 }
 ```
 
+If you are a cloudformation user, all of the IAM JSON show so far is compatible, just remove the variables and add it to your template.
+
 ### Deploy with Apex
 
 Now you have two roles in two AWS accounts, both which can be assumed by the CI build server for deployments.  For Apex, you can deploy easily by using the IAM role option on the command line.
@@ -172,8 +174,12 @@ Now you have two roles in two AWS accounts, both which can be assumed by the CI 
 apex deploy -i arn:aws:iam::000000000002:role/lambda_assume_role
 ```
 
+What happens in this example is that Apex assumes the role, whether it be A or B, this then hands Apex the permissions to deploy Lambdas, describe VPCs etc.  This scopes all the permissions to just the assumed role, which is typical of how most CI plugins work.  Jenkins and Teamcity plugins that are focused on AWS usually have a box that allows for role based usage for this exact use case.  So whether it be on the command line or using a plugin, the process is the same.
+
 ## Conclusion
 
-If you are a cloudformation user, all of the IAM JSON is compatible, just remove the variables and add it to your template.
+Setting this up is not that difficult, often the main blockers are permissions cross accounts for specific resources, such as PassRole.  What this process is enables is a tighter focus on security as your roles will be scoped exactly on the permissions you need, which is often counter to some CI setups that use full access.
 
-Setting this up is not that difficult, often the main blockers are permissions cross accounts for specific resources, such as PassRole.  Full code used [on Github](https://github.com/DaveBlooman/cross_account_deploys)
+Don't do that.
+
+Full code used [on Github](https://github.com/DaveBlooman/cross_account_deploys)
