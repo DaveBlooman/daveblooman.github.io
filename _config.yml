@@ -10,7 +10,7 @@ title:            David Blooman
 tagline:          'Cloud Infrastructure Made Simple'
 description:      'Infrastructure and code by <a href="https://twitter.com/dblooman" target="_blank">@dblooman</a>.'
 url:              https://github.com/DaveBlooman
-baseurl:          /
+
 
 author:
   name:           'David Blooman'
