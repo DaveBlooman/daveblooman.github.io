@@ -1,7 +1,7 @@
 ---
 layout: post
 category: AWS
-tags: aws Lambda apex [Consul](https://www.consul.io/)
+tags: aws lambda apex consul
 ---
 
 [AWS Lambda](https://aws.amazon.com/Lambda/details/) has been around for a couple of years, in that time the way in which you create and deploy functions has been streamlined by several tools, Apex is one of them.  [Apex](http://apex.run/) may have only hit the scene about 8 months ago, but since then, has become one of the leading tools in Lambda automation, keeping pace with AWS releases and features.  Here is how we use Apex and Lambda to create a pipeline of services.

@@ -4,8 +4,6 @@ category: docker
 tags: docker linux
 ---
 
-### So Stackoverflow told me....
-
 It's pretty common that when you have no idea what you are doing, you want things to "just work".  Docker, and by extension, Linux, have a world of documentation, but often it's the little things that trip people up.  When installing software into your Docker image, something may not work, a C library, some kind of XML error, something with a .so file.  You go onto a forum and see loads of commands and packages not in your Dockerfile, add them in and then it works, but you have no idea what you did.   Let's look at what you might be copying.
 
 ### From the top
