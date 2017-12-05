@@ -7,9 +7,13 @@ sidebar_link: true
 
 ## Employment
 
+**Depop**
+Platform Engineer
+2017 - Present
+
 **FundApps**  
 Infrastructure Engineer
-2016 - Present
+2016 - 2017
 
 **BBC News**  
 Senior Developer
@@ -22,7 +26,7 @@ Senior Developer
 
 **Languages** : Ruby, Go  
 **Cloud** : AWS  
-**Provisioning**: Docker, Vagrant, Packer  
+**Provisioning**: Docker, Packer Terraform
 **Monitoring** : InfluxDB, Graphite, Grafana, Cloudwatch  
 **Load Testing** : Jmeter, Gatling  
 **Testing** : RSpec/Cucumber, Wraith  
@@ -32,12 +36,13 @@ Senior Developer
 
 ### Personal Projects
 
-**EVA** - A Docker web control interface  - [Github Link](https://github.com/DaveBlooman/eva)  
+**Fasten** - Deploy to a VPS with ease  - [Github Link](https://github.com/DaveBlooman/fasten)  
 **Linkey** - Link checker and simple integration test tool  - [Github Link](https://github.com/DaveBlooman/linkey)  
-**Gatling Docker** - Simple way of viewing data from Gatling using InfluxDB  - [Github Link](https://github.com/DaveBlooman/gatling-docker)  
-**Mass Site Testing** - Solution to testing 30+ sites from 1 codebase  - [Github Link](https://github.com/DaveBlooman/page-objects-example)  
+**Gatling Docker** - Simple way of viewing data from Gatling using InfluxDB  - [Github Link](https://github.com/DaveBlooman/gatling-docker)   
 
 ### Projects
+
+**[Fasten](https://github.com/DaveBlooman/fasten)** - Fasten helps deploy Ruby, node and Go applications to Ubuntu and Amazon Linux VM's with no dependencies.  Initially created to rapid deloy applications to test API gateway, I found this useful for testing new version of AMI's and new versions of dependecies without having to spend time in a CI environment.
 
 **[Acervos](https://github.com/acervos)** - Repo containing AWS cloudformation and code to help provision services easily.
 
